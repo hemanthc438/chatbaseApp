@@ -48,3 +48,39 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+INSTALLATION GUIDE
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser (npx : File C:\Program Files\nodejs\npx.ps1 cannot be loaded because running scripts is disabled on this system. For more information, see about_Execution_Policies 
+at https:/go.microsoft.com/fwlink/?LinkID=135170.)
+Expo guide: https://docs.expo.dev/router/installation/
+
+nativewind guide : https://www.nativewind.dev/v4/getting-started/expo-router
+
+Expo-Authentication guide : https://docs.expo.dev/router/reference/authentication/
+
+
+NPMJS - 
+1-react native responsive screen docs
+   -https://www.npmjs.com/package/react-native-responsive-screen
+
+2-expo vector icons
+   -https://www.npmjs.com/package/@expo/vector-icons
+   -https://icons.expo.fyi/Index (icons)
+
+Lottie-react-native (for animations and loading screens)
+   -https://www.npmjs.com/package/lottie-react-native
+   -https://lottiefiles.com/ (animation site)
+
+React native async storage
+   -https://www.npmjs.com/package/@react-native-async-storage/async-storage
+
+Expo image - to use the cached images
+   -https://docs.expo.dev/versions/latest/sdk/image/
+   -npx expo install expo-image
+
+react-native-popup-menu
+   -https://www.npmjs.com/package/react-native-popup-menu
+   -npm i react-native-popup-menu
+
+FIREBASE QUEIRES
+   -https://firebase.google.com/docs/firestore/query-data/queries#simple_queries
