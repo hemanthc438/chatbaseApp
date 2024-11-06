@@ -31,7 +31,7 @@ export const AuthContextProvider = ({children})=>{
 
         if(docSnapshot.exists()){
             let data = docSnapshot.data()
-            setUser({...user,username:data.username,profileURL:data.profileURL,userId:data.userId,updatedAt:serverTimestamp()})
+            setUser({...user,username:data.username,profileURL:data.profileURL,userId:data.userId,updatedAt:serverTimestamp(),about:data.about})
 
         }
     }
@@ -65,7 +65,8 @@ export const AuthContextProvider = ({children})=>{
                 profileURL,
                 email,
                 userId: response?.user?.uid,
-                createdAt:serverTimestamp()
+                createdAt:serverTimestamp(),
+                about:"Hey there! I'm using chatbase"
             })
             return { success:true, data: response?.user }
         }catch(e){

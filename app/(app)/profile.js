@@ -17,28 +17,57 @@ export default function Profile() {
     const {user,updateUserData}=useAuth()
     const {router}=useRouter()
     let [username,setUserName] =useState(user?.username)
+    let [about,setAbout] =useState(item?.about)
     const [showMenu, setShowMenu] = useState(false);
     const editText = useRef("")
-    //const editMode = useRef("")
+    const editMode = useRef("")
     username.current=user?.username
     if(item.profileURL==""){item.profileURL="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT43Q1CTrvRfckF6osuwyT4-TOYrBRWTYSUCc-plMWXrIkbARNsWnCAA67TQE7he2qEJ1Y&usqp=CAU.png"}
     useEffect(()=>{
     },[])
-    const handleUserNameEdit = () =>{
+    const handleUserNameEdit = (editType) =>{
       setShowMenu(true) 
-      editText.current=user?.username
-      //editMode.current="username"
+      // if(editType=="about"){
+      //   editText.current=
+      // }
+      //editText.current=user?.username
+      editMode.current=editType
     }
     const handleEdit =async()=>{
-     // if(editMode.current=="username"){
-      const docref = doc(db,"users",user?.userId)
-      await updateDoc(docref,{
-        "username":editText.current
-      })
-      await updateUserData(user?.userId)
-      setUserName(editText.current)
-      editText.current=""
-      setShowMenu(showMenu?false:true)
+      if(editMode.current=="username"){
+        console.log(editMode.current)
+        if(editText.current!=""){
+          const docref = doc(db,"users",user?.userId)
+          await updateDoc(docref,{
+            "username":editText.current
+          })
+          await updateUserData(user?.userId)
+          setUserName(editText.current)
+          editText.current=""
+          setShowMenu(showMenu?false:true)
+        }
+        else{
+          Alert.alert("Please enter a new name")
+        }
+      }
+    else if(editMode.current=="about"){
+      console.log(editMode.current)
+      if(editText.current!=""){
+        const docref = doc(db,"users",user?.userId)
+        await updateDoc(docref,{
+          "about":editText.current
+        })
+        await updateUserData(user?.userId)
+        setAbout(editText.current)
+        editText.current=""
+        setShowMenu(showMenu?false:true)
+        }
+      }
+      else{
+        editText.current="Hey there! I'm using chatbase"
+        setAbout(editText.current)
+        editText.current=""
+      }
     }
   return (
     <View className="flex-1">
@@ -60,7 +89,7 @@ export default function Profile() {
               <Text style={{fontSize:hp(2)}} className=" text-neutral-300">Username</Text>
               <View className="flex-row justify-between">
                 <Text style={{fontSize:hp(2.5)}} className="text-white gap-2">{username}</Text>
-                <Pressable onPress={handleUserNameEdit} className="px-0">
+                <Pressable onPress={()=>{handleUserNameEdit("username")}} className="px-0">
                   <Feather name="edit" size={15} color="white" />
                 </Pressable>
             </View>
@@ -72,8 +101,8 @@ export default function Profile() {
             <View className="px-5 border border border-b-neutral-700 ">
               <Text style={{fontSize:hp(2)}} className=" text-neutral-300">About</Text>
               <View className="flex-row justify-between">
-              <Text style={{width:wp(80)}} className="text-white pb-3 ">This name is not you mail or pin. This name is displayed to your chatbase contacts</Text>
-                <Pressable onPress={handleUserNameEdit} className="px-0">
+              <Text style={{width:wp(80)}} className="text-white pb-3 ">{about}</Text>
+                <Pressable onPress={()=>{handleUserNameEdit("about")}} className="px-0">
                   <Feather name="edit" size={15} color="white" />
                 </Pressable>
             </View>
