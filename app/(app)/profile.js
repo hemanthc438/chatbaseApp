@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Modal, TextInput, Alert } from 'react-native'
+import { View, Text, Pressable, Modal, TextInput, Alert, Platform } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { useAuth,updateUserData } from '../../context/authContext'
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -14,6 +14,7 @@ import { Entypo, Feather, FontAwesome } from '@expo/vector-icons';
 
 export default function Profile() {
     const item= useLocalSearchParams();
+    const ios=Platform.OS==='ios'
     const {user,updateUserData}=useAuth()
     const {router}=useRouter()
     let [username,setUserName] =useState(user?.username)
@@ -85,24 +86,24 @@ export default function Profile() {
         <View className="gap-3 pt-5">
           <View className="flex-row">
           <FontAwesome name="user" size={hp(3.3)} color="white"/>
-            <View className="px-5 border border border-b-neutral-700 ">
-              <Text style={{fontSize:hp(2)}} className=" text-neutral-300">Username</Text>
-              <View className="flex-row justify-between">
+            <View className="border border-b-neutral-700 ">
+              <Text style={{fontSize:hp(2)}} className="px-5 text-neutral-300">Username</Text>
+              <View className="px-5 flex-row justify-between">
                 <Text style={{fontSize:hp(2.5)}} className="text-white gap-2">{username}</Text>
-                <Pressable onPress={()=>{handleUserNameEdit("username")}} className="px-0">
+                <Pressable onPress={()=>{handleUserNameEdit("username")}} className="m">
                   <Feather name="edit" size={15} color="white" />
                 </Pressable>
             </View>
-            <Text className="text-neutral-300 pt-3 pb-3">This name is not your mail or pin. This name is displayed to your chatbase contacts</Text>
+            <Text className={`${ios?'':'px-5'} text-neutral-300 pt-3 pb-3`}>This name is not your mail or pin. This name is displayed to your chatbase contacts</Text>
             </View>
           </View>
           <View className="flex-row">
             <Entypo name="info-with-circle" size={hp(2.8)} color="white" />
-            <View className="px-5 border border border-b-neutral-700 ">
-              <Text style={{fontSize:hp(2)}} className=" text-neutral-300">About</Text>
-              <View className="flex-row justify-between">
+            <View className="border border-b-neutral-700 ">
+              <Text style={{fontSize:hp(2)}} className="px-5 text-neutral-300">About</Text>
+              <View className="px-5 flex-row  justify-between">
               <Text style={{width:wp(80)}} className="text-white pb-3 ">{about}</Text>
-                <Pressable onPress={()=>{handleUserNameEdit("about")}} className="px-0">
+                <Pressable onPress={()=>{handleUserNameEdit("about")}} >
                   <Feather name="edit" size={15} color="white" />
                 </Pressable>
             </View>

@@ -59,13 +59,6 @@ export default function Header({user}) {
                         backgroundColor:'gray'
                       }
                     }}>
-                      <MenuItem
-                        text="Edit Profile"
-                        action={handleEditProfile}
-                        value={null}
-                        icon={<AntDesign name="profile" size={hp(3.3)} color="black" />}
-                      />
-                        <Divider/>
                         <MenuItem
                           text="Reset password"
                           action={handleReset}
